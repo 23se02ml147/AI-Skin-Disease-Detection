@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Skin Disease Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+    <div class="container py-5">
+      <h1 class="mb-4">AI Skin Disease Detection</h1>
+      <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <input class="form-control" type="file" name="file" accept="image/*" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Upload & Predict</button>
+        <input type="hidden" name="action" value="predict">
+      </form>
+
+      <hr>
+      <h4>Add image to dataset</h4>
+      <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="target_class" class="form-label">Select existing class</label>
+          <select class="form-select" name="target_class">
+            <option value="">-- choose --</option>
+            {% for c in classes %}
+            <option value="{{ c }}">{{ c.capitalize() }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="new_class" class="form-label">Or add new class name</label>
+          <input class="form-control" type="text" name="new_class" placeholder="e.g., acne">
+        </div>
+        <div class="mb-3">
+          <input class="form-control" type="file" name="file" accept="image/*" required>
+        </div>
+        <button class="btn btn-secondary" type="submit">Add to dataset</button>
+        <input type="hidden" name="action" value="add">
+      </form>
+
+      {% if message %}
+      <div class="alert alert-info mt-3">{{ message }}</div>
+      {% endif %}
+
+      {% if prediction %}
+      <hr>
+      <h3>Top Predictions</h3>
+      <ul>
+        {% for label, conf in prediction %}
+          <li>{{ label }} — {{ '%.2f'|format(conf) }}%</li>
+        {% endfor %}
+      </ul>
+      <h4>All class probabilities</h4>
+      <ul>
+        {% for k,v in probs.items() %}
+          <li>{{ k.capitalize() }} — {{ '%.2f'|format(v) }}%</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+dataset/
+dataset_ham/
+dataset_final/
+venv/
+__pycache__/
+*.h5
