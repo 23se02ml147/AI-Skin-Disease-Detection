@@ -7,4 +7,5 @@ reportlab
 pandas
 plotly
 opencv-python-headless
+bcrypt
 psycopg2-binary
