@@ -1,6 +1,6 @@
+import psycopg2  # MUST be imported first to prevent TensorFlow SSL crash
 import os
 import bcrypt
-import psycopg2
 from psycopg2 import extras
 from datetime import datetime
 
