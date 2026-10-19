@@ -9,3 +9,4 @@ plotly
 opencv-python-headless
 bcrypt
 psycopg2-binary
+tensorflow-cpu==2.18.1
